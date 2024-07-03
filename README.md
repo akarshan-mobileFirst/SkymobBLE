@@ -10,6 +10,32 @@ A React Native app to scan and display nearby BLE peripherals using Expo CLI.
    cd SkymobBLE
    ```
 
+# List of Dependencies
+
+    "@expo/vector-icons": "^14.0.2",
+    "@react-navigation/native": "^6.0.2",
+    "expo": "~51.0.17",
+    "expo-bluetooth": "^0.0.0",
+    "expo-constants": "~16.0.2",
+    "expo-font": "~12.0.7",
+    "expo-linking": "~6.3.1",
+    "expo-router": "~3.5.17",
+    "expo-splash-screen": "~0.27.5",
+    "expo-status-bar": "~1.12.1",
+    "expo-system-ui": "~3.0.6",
+    "expo-web-browser": "~13.0.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.74.2",
+    "react-native-ble-plx": "^3.2.0",
+    "react-native-geolocation-service": "^5.3.1",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-permissions": "^4.1.5",
+    "react-native-reanimated": "~3.10.1",
+    "react-native-safe-area-context": "4.10.1",
+    "react-native-screens": "3.31.1",
+    "react-native-web": "~0.19.10"
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
