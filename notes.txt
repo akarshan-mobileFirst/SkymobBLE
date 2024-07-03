@@ -1,0 +1,7 @@
+### Notes and Caveats
+
+- Ensure the BLE and location services are enabled on your device.
+- Handle potential permission issues gracefully.
+- Additional features could include filtering devices by name or RSSI.
+
+With this setup, you should be able to create a React Native app that meets all the specified requirements. Let me know if you need further assistance or any specific features!

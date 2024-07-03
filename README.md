@@ -1,5 +1,15 @@
 # SkymobBLE
 
+A React Native app to scan and display nearby BLE peripherals using Expo CLI.
+
+## Installation
+
+1. Clone the repository
+   ```bash
+   git clone <your-repo-url>
+   cd SkymobBLE
+   ```
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
