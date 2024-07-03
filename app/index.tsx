@@ -119,6 +119,95 @@ export default function HomeScreen() {
   const checkPermissions = () => {
     switch (Platform.OS) {
       case "ios":
+        checkMultiple([
+          PERMISSIONS.IOS.BLUETOOTH,
+          PERMISSIONS.IOS.LOCATION_ALWAYS,
+          PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+        ])
+          .then((statuses) => {
+            const requestPermissions: any = [];
+            if (statuses[PERMISSIONS.IOS.BLUETOOTH] !== RESULTS.GRANTED) {
+              requestPermissions.push(PERMISSIONS.IOS.BLUETOOTH);
+            } else {
+              console.log(PERMISSIONS.IOS.BLUETOOTH, "permission is granted");
+            }
+            if (statuses[PERMISSIONS.IOS.LOCATION_ALWAYS] !== RESULTS.GRANTED) {
+              requestPermissions.push(PERMISSIONS.IOS.LOCATION_ALWAYS);
+            } else {
+              console.log(
+                PERMISSIONS.IOS.LOCATION_ALWAYS,
+                "permission is granted"
+              );
+              checkLocationButton();
+            }
+            if (
+              statuses[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE] !== RESULTS.GRANTED
+            ) {
+              requestPermissions.push(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+            } else {
+              console.log(
+                PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+                "permission is granted"
+              );
+              checkLocationButton();
+            }
+
+            if (requestPermissions.length > 0) {
+              requestMultiple(requestPermissions)
+                .then((newStatuses: any) => {
+                  const messageForStatuses = (
+                    status: any,
+                    permission: String
+                  ) => {
+                    switch (status) {
+                      case RESULTS.UNAVAILABLE:
+                        console.log(
+                          `${permission} feature is not available on this device`
+                        );
+                        break;
+                      case RESULTS.DENIED:
+                        console.log(
+                          `The ${permission} permission has not been requested / is denied but requitable`
+                        );
+                        break;
+                      case RESULTS.LIMITED:
+                        console.log(
+                          `The ${permission} permission is limited: some actions are possible`
+                        );
+                        break;
+                      case RESULTS.GRANTED:
+                        console.log(`The ${permission} permission is granted`);
+                        if (
+                          permission === PERMISSIONS.IOS.LOCATION_ALWAYS ||
+                          permission === PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
+                        ) {
+                          checkLocationButton();
+                        }
+                        break;
+                      case RESULTS.BLOCKED:
+                        console.log(
+                          `The ${permission} permission is denied and not requitable anymore`
+                        );
+                        break;
+                    }
+                  };
+                  requestPermissions.forEach((element: any) => {
+                    messageForStatuses(newStatuses[element], element);
+                  });
+                })
+                .then(() => {
+                  if (scanInterval?.current) {
+                    clearInterval("BLEInterval");
+                  }
+                  scanInterval.current = setInterval(() => {
+                    if (isScanningRef?.current === false) scanForPeripherals();
+                  }, 5000);
+                });
+            }
+          })
+          .catch((error) => {
+            console.log("Permission Error:", error);
+          });
         break;
       case "android":
         checkMultiple([
@@ -229,7 +318,6 @@ export default function HomeScreen() {
           .catch((error) => {
             console.log("Permission Error:", error);
           });
-
         break;
       default:
         break;
