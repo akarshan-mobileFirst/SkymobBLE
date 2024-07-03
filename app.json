@@ -16,7 +16,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSBluetoothAlwaysUsageDescription": "We need access to Bluetooth to scan for devices."
-      }
+      },
+      "bundleIdentifier": "com.SkymobBLE"
     },
     "android": {
       "adaptiveIcon": {
@@ -39,9 +40,13 @@
     "plugins": [
       "expo-router",
       [
-        "react-native-ble-plx", {
+        "react-native-ble-plx",
+        {
           "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
+          "modes": [
+            "peripheral",
+            "central"
+          ],
           "bluetoothAlwaysPermission": "Allow SkymobBLE to connect to bluetooth devices"
         }
       ]
